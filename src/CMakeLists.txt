@@ -3,6 +3,7 @@
                                   "Executable.cpp"
                                   "Button.cpp"
                                   "SidePannel.cpp"
+                                  "Map.cpp"
                                   )
                                    
                                    
