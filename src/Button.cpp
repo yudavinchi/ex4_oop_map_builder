@@ -54,3 +54,12 @@ void Button::handle_click_button(sf::Vector2f & location)
 	if(get_outer_rect().getGlobalBounds().contains(location))
 	std::cout << "clicked on " << m_text << std::endl;
 }
+
+//check if click was inside our button
+bool Button::contain_click_button(sf::Vector2i &location)
+{
+	if (get_outer_rect().getGlobalBounds().contains(location.x, location.y))
+		return true;
+
+	return false;
+}

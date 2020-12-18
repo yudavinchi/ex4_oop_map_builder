@@ -6,10 +6,8 @@
 class Map
 {
 	Map(int m_width, int m_height, int size_of_char);
+
 	void insert(int x, int y, char character);
-
-
-
 
 private:
 	//hold the map
