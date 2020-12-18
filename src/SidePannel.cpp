@@ -7,8 +7,11 @@ SidePannel::SidePannel(float height_of_window, float widht_of_window)
 	//setting the 30% of window as side pannel;
 	m_width = 0.3 * widht_of_window;
 }
-
-void SidePannel::draw(sf::RenderWindow& window)
+int SidePannel::getWidth()
+{
+	return m_width;
+}
+void SidePannel::Draw(sf::RenderWindow& window)
 {
 	window.draw(get_outer_reect());
 	window.draw(get_inner_rect());

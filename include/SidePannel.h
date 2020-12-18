@@ -7,7 +7,8 @@ class SidePannel
 public:
 	SidePannel(float height_of_window, float widht_of_window);
 
-	void draw(sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window);
+	int getWidth();
 
 private:
 	sf::RectangleShape get_inner_rect();
