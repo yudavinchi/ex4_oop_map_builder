@@ -9,6 +9,8 @@ public:
 
 	void Draw(sf::RenderWindow& window);
 
+	int getWidth();
+
 private:
 	sf::RectangleShape get_inner_rect();
 	sf::RectangleShape get_outer_rect();

@@ -4,6 +4,9 @@
                                   "Button.cpp"
                                   "SidePannel.cpp"
                                   "Map.cpp"
+                                  "Ui.cpp"
+                                  "AddButton.cpp"
+                                  "RemoveButton.cpp"
                                   "Intro.cpp"
                                   )
                                    

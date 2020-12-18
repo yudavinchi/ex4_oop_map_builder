@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Macros.h"
 #include <SFML/Graphics.hpp>
 #include <string.h>
 #include <iostream>  //for debug 
@@ -7,16 +7,21 @@
 class Button
 {
 public:
-	Button(sf::Vector2f & vector, int height, int witdth, sf::Font & font,std::string text);
+	Button() = default;
+	Button(sf::Vector2f& vector, int height, int width, sf::Font& font, std::string text);
 
 	void Draw(sf::RenderWindow& window);
-
-	//should be specific for each buttton
-	void handle_click_button(sf::Vector2f &location);
+  bool button_pressed(sf::Vector2f& location);
+  void set_inner_color(const sf::Color& color);
+	enum pressed get_action();
+	void set_pressed();
+	void reset_pressed();
+  void handle_click_button(sf::Vector2f &location);
 	bool contain_click_button(sf::Vector2i &location);
-private:
+  pressed m_action;
+protected:
 
-	
+
 	sf::RectangleShape get_inner_rect();
 	sf::RectangleShape get_outer_rect();
 	sf::Text getText();

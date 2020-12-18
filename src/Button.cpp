@@ -2,9 +2,11 @@
 
 
 //do we want to get all those members? or some should be set as color
-Button::Button(sf::Vector2f& vector, int height, int width,  sf::Font& font, std::string name)
+Button::Button(sf::Vector2f& vector, int height, int width, sf::Font& font, std::string name)
 :m_position(vector), m_height(height), m_width(width), m_font(font),m_text(name)
-{};
+{
+	m_text = name;
+};
 
 void Button::Draw(sf::RenderWindow& window)
 {
@@ -13,7 +15,10 @@ void Button::Draw(sf::RenderWindow& window)
 	window.draw(getText());
 };
 
-
+enum pressed Button::get_action()
+{
+	return m_action;
+}
 sf::RectangleShape Button::get_inner_rect()
 {
 	auto rect = sf::RectangleShape({ m_width- 5, m_height -5 });
@@ -38,8 +43,8 @@ sf::Text Button::getText()
 
 	auto text = sf::Text(m_text, m_font);
 
-	text.setCharacterSize(m_height / 2);
-
+	//text.setCharacterSize(m_height / 2);
+	text.setCharacterSize(16);
 	float x = m_position.x;
 	float y = m_position.y + (0.2) * m_height;
 	sf::Vector2f location(x, y);
@@ -49,10 +54,27 @@ sf::Text Button::getText()
 }
 
 //check if click was inside our button
-void Button::handle_click_button(sf::Vector2f & location)
+bool Button::button_pressed(sf::Vector2f & location)
 {
-	if(get_outer_rect().getGlobalBounds().contains(location))
-	std::cout << "clicked on " << m_text << std::endl;
+	if (get_outer_rect().getGlobalBounds().contains(location)) {
+		return true;
+	}	
+	return false;
+}
+
+void Button::set_inner_color(const sf::Color & color)
+{
+	m_inner_color = color;
+}
+
+void Button::set_pressed()
+{
+	set_inner_color(sf::Color::Red);
+}
+
+void Button::reset_pressed()
+{
+	set_inner_color(sf::Color(87, 87, 87));
 }
 
 //check if click was inside our button

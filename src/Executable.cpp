@@ -1,8 +1,11 @@
 #include "Executable.h"
+#define ADD_BUTTON_PRESSED 10
+#define DELETE_BUTTON_PRESSED 30
 
 
 void Executable::run()
 {
+
 	
 	Intro intro;
 
@@ -11,86 +14,82 @@ void Executable::run()
 
 	std::cout << size.x << " " << size.y << std::endl;
 
-
-	/*
-
-	//should move it somewhere else?
-	int num_of_buttons = 0;
-	// Declare and load a font - should be member of window?
 	sf::Font font;
 	font.loadFromFile("arial.ttf");
+	Map map(10, 10, 30,font);
+	int flag;
+	sf::Event event;
 
 	//creates main window
 	Window window(1152, 872, "new");
 
+	//sets location of the map based on window
+	map.set_location(window);
+
+	//sets ui
+	Ui ui(window,font, map);
+	
 	//renders main window
 	sf::RenderWindow main_window(sf::VideoMode(window.get_width(), window.get_height()), window.get_name());
 	
-	//creates side pannel
-	SidePannel side_pannel(window.get_height(), window.get_width());
-
-	//sets location - just for checking if it works - should be held with the rest inside a member?
-	sf::Vector2f location(10,20);
-
-	//should be initialized with window? or atleast after inserting size of board
-	Button new_button(location, 50, 200, font, "Delete");
-	//-puts it in vector of buttons
-	m_button.push_back(new_button);
-	//this aswell should be moved out
-	++num_of_buttons;
-
-	sf::Vector2i location_of_mouse;
 
 	//main window
 	while (main_window.isOpen())
 	{
+		main_window.clear(sf::Color::White);
 	
-		//clears
-		main_window.clear();
+
+		//--------------------------------------------------------------------------------
+		sf::Mouse mouse;
+			
+		auto location = main_window.mapPixelToCoords(
+			{ mouse.getPosition(main_window).x, mouse.getPosition(main_window).y });
+
+
+		ui.handle_mouse_over(location);
+
+		//--------------------------------------------------------------------------------
+		//draws all of the ui
+		ui.Draw(main_window);
 		
-		//prints all
-		side_pannel.Draw(main_window);
-
-		new_button.Draw(main_window);
-
-		//displays
 		main_window.display();
 
-		//to handle events
-		sf::Event event;
-
-		location_of_mouse = sf::Mouse::getPosition(main_window);
-
-		std::cout << location_of_mouse.x <<" "<<  location_of_mouse.y << std::endl;
 
 		while (main_window.pollEvent(event))
 		{	
 			switch (event.type)
 			{
-			case(sf::Event::Closed):
-				main_window.close();
-				break;
-			
-			case(sf::Event::MouseButtonPressed):
-				//sets location based on main window and not on the screen
-				auto location = main_window.mapPixelToCoords(
-					{ event.mouseButton.x, event.mouseButton.y });
-				//handles both right and left clicks - should change
-				handle_click(location, num_of_buttons);
-				break;
+				case(sf::Event::Closed):
+					main_window.close();
+					break;
+
+				case sf::Event::MouseButtonReleased:
+				{
+					auto location = main_window.mapPixelToCoords(
+						{ event.mouseButton.x, event.mouseButton.y });
+
+					switch (event.mouseButton.button)
+					{
+						case sf::Mouse::Button::Left:
+						{
+						handle_click_non_pressed(location, ui);
+						break;
+						}
+					break;
+					}
+				}
 			}
 		}
+
+
 	}
 
 	*/
 }
 
-
-//handles clicks
-void Executable::handle_click(sf::Vector2f location, int number_of_buttons)
+void Executable::handle_click_non_pressed(sf::Vector2f &location, Ui & ui)
 {
-	//runs on button
-	for (int i = 0; i < number_of_buttons; ++i) {
-		m_button[i].handle_click_button(location);
-	}
+	ui.hadle_click(location);
 }
+
+
