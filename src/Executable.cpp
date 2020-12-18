@@ -84,7 +84,6 @@ void Executable::run()
 
 	}
 
-	*/
 }
 
 void Executable::handle_click_non_pressed(sf::Vector2f &location, Ui & ui)

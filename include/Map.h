@@ -9,6 +9,7 @@ class Map
 
 public:
 	Map(float m_width, float m_height, float size_of_char, sf::Font& font);
+
 	void insert(int x, int y, char character);
 	void Draw(sf::RenderWindow& window);
 	void set_location(Window& window);
@@ -19,9 +20,6 @@ public:
 	bool handle_click(sf::Vector2f& location ,pressed& pressed);
 	void handle_mouse_over(sf::Vector2f& location, pressed& pressed);
 	void remove_char_from_map(int i, int j);
-	Map(int m_width, int m_height, int size_of_char);
-
-	void insert(int x, int y, char character);
 
 private:
 	//for now
