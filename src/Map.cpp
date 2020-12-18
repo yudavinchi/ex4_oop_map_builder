@@ -4,8 +4,9 @@
 Map::Map(float width, float height, float size_of_char,sf::Font& font):
 	m_width(width), m_height(height),size_of_char(size_of_char), m_font(font)
 {
-
 	std::vector <std::vector<char> > map;
+
+
 	map.resize(height);
 
 	//setting sizes

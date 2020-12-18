@@ -7,6 +7,8 @@
 #include "SidePannel.h"
 #include "Ui.h"
 #include "Macros.h"
+#include "Intro.h"
+
 
 //shoud it be a class?????
 class Executable

@@ -5,13 +5,22 @@
 
 void Executable::run()
 {
+
+	
+	Intro intro;
+
+
+	sf::Vector2i size = intro.run();
+
+	std::cout << size.x << " " << size.y << std::endl;
+
 	sf::Font font;
 	font.loadFromFile("arial.ttf");
 	Map map(10, 10, 30,font);
 	int flag;
 	sf::Event event;
 
-	//creaates main window
+	//creates main window
 	Window window(1152, 872, "new");
 
 	//sets location of the map based on window
@@ -23,17 +32,19 @@ void Executable::run()
 	//renders main window
 	sf::RenderWindow main_window(sf::VideoMode(window.get_width(), window.get_height()), window.get_name());
 	
+
 	//main window
 	while (main_window.isOpen())
 	{
 		main_window.clear(sf::Color::White);
 	
-		//clears
+
 		//--------------------------------------------------------------------------------
 		sf::Mouse mouse;
 			
 		auto location = main_window.mapPixelToCoords(
 			{ mouse.getPosition(main_window).x, mouse.getPosition(main_window).y });
+
 
 		ui.handle_mouse_over(location);
 
@@ -43,11 +54,9 @@ void Executable::run()
 		
 		main_window.display();
 
-		flag = ADD_BUTTON_PRESSED;
-		
 
 		while (main_window.pollEvent(event))
-		{
+		{	
 			switch (event.type)
 			{
 				case(sf::Event::Closed):
@@ -74,6 +83,8 @@ void Executable::run()
 
 
 	}
+
+	*/
 }
 
 void Executable::handle_click_non_pressed(sf::Vector2f &location, Ui & ui)

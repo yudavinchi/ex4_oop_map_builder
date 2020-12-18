@@ -76,3 +76,12 @@ void Button::reset_pressed()
 {
 	set_inner_color(sf::Color(87, 87, 87));
 }
+
+//check if click was inside our button
+bool Button::contain_click_button(sf::Vector2i &location)
+{
+	if (get_outer_rect().getGlobalBounds().contains(location.x, location.y))
+		return true;
+
+	return false;
+}
