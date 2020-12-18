@@ -5,6 +5,7 @@
 #include <vector>
 #include "Button.h"
 #include "SidePannel.h"
+#include "Intro.h"
 
 //shoud it be a class?????
 class Executable

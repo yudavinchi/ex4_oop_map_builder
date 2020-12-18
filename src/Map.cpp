@@ -4,7 +4,7 @@
 Map::Map(int width, int height, int size_of_char):
 	m_width(width), m_height(height),size_of_char(size_of_char)
 {
-	std::vector <std::vector<char> > map;
+	std::vector <std::vector<char>> map;
 	map.resize(height);
 
 	//setting sizes
