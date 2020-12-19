@@ -23,7 +23,7 @@ public:
 	char get_char(int i, int j);
 	float get_sprite_size();
 	void set_textures(std::vector<std::shared_ptr<sf::Texture>> &textures);
-
+	void reset();
 private:
 	bool m_there_is_player = false;
 	sf::Vector2i m_player_location = sf::Vector2i(-1,-1);

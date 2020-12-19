@@ -6,7 +6,7 @@
                                   "Map.cpp"
                                   "Ui.cpp"
                                   "AddButton.cpp"
-                                  "RemoveButton.cpp"
+                                  "SpriteButton.cpp"
                                   "Intro.cpp"
                                   "IntroButton.cpp"
                                   )

@@ -9,6 +9,10 @@
 #define WALL_TEXTURE 6
 #define REMOVE_PRS_TEXTURE 7
 #define REMOVE_NT_PRS_TEXTURE 8
+#define RESET_PRS_TEXTURE 9
+#define RESET_NT_PRS_TEXTURE 10
+
+
 enum class pressed
 {
 	NONE,
@@ -19,7 +23,8 @@ enum class pressed
 	WALL,
 	POLE,
 	DELETE,
-	SAVE
+	SAVE,
+	RESET
 };
 
 

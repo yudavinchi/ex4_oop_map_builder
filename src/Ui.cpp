@@ -47,10 +47,14 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 
 	//build side pannel	
 	sf::Vector2f location_remove(50, 250);
-	
-	m_remove_button = RemoveButton(location_remove, 50, 100);
+	sf::Vector2f location_reset(50, 350);
+	m_remove_button = SpriteButton(location_remove, 50, 100);
 
 	m_remove_button.set_texture(m_textures[REMOVE_PRS_TEXTURE], m_textures[REMOVE_NT_PRS_TEXTURE]);
+
+	m_reset_button = SpriteButton(location_reset, 50, 100);
+
+	m_reset_button.set_texture(m_textures[RESET_PRS_TEXTURE], m_textures[RESET_NT_PRS_TEXTURE]);
 
 };
 
@@ -94,6 +98,15 @@ void Ui::load_textures(std::vector<std::shared_ptr<sf::Texture>>& m_textures)
 	auto texture_ptr9 = std::make_shared<sf::Texture>();
 	texture_ptr9->loadFromFile("Remove NP.png");
 	m_textures.push_back(std::move(texture_ptr9));
+
+	auto texture_ptr10 = std::make_shared<sf::Texture>();
+	texture_ptr10->loadFromFile("Reset P.png");
+	m_textures.push_back(std::move(texture_ptr10));
+
+
+	auto texture_ptr11 = std::make_shared<sf::Texture>();
+	texture_ptr11->loadFromFile("Reset NP.png");
+	m_textures.push_back(std::move(texture_ptr11));
 };
 
 void Ui::Draw(sf::RenderWindow& window)
@@ -112,6 +125,7 @@ void Ui::Draw(sf::RenderWindow& window)
 
 	//draws delete button
 	m_remove_button.draw_remove(window);
+	m_reset_button.draw_remove(window);
 	//draws save button
 
 }
@@ -129,8 +143,8 @@ void Ui::hadle_click(sf::Vector2f & location)
 				m_remove_button.set_pressed();
 			else if (m_pressed == pressed::SAVE)
 				std::cout << "svae";
-			else
-				
+			else if(m_pressed == pressed::RESET)
+				m_reset_button.set_pressed();
 			
 			{
 
@@ -171,14 +185,16 @@ void Ui::hadle_click(sf::Vector2f & location)
 	
 
 	//handles click on delete button
-	
 	if (m_remove_button.button_pressed(location))
 	{
 		if (m_pressed != pressed::DELETE)
 		{
 			if(m_pressed == pressed::SAVE){
 			}
-			
+			else if (m_pressed == pressed::RESET)
+			{
+				m_reset_button.set_pressed();
+			}
 			else {
 				if(m_curr_pressed_add != NULL)
 				m_curr_pressed_add->set_pressed();
@@ -187,6 +203,33 @@ void Ui::hadle_click(sf::Vector2f & location)
 			//resets other button
 		m_pressed = pressed::DELETE;
 		m_remove_button.set_pressed();
+		m_curr_pressed_add = NULL;
+		return;
+	}
+
+
+	if (m_reset_button.button_pressed(location))
+	{
+		m_map.reset();
+
+		if (m_pressed != pressed::RESET)
+		{
+			if (m_pressed == pressed::SAVE)
+			{
+
+			}
+			else if (m_pressed == pressed::DELETE)
+			{
+				m_remove_button.set_pressed();
+			}
+			else {
+				if (m_curr_pressed_add != NULL)
+					m_curr_pressed_add->set_pressed();
+			}
+		}
+		//resets other button
+		m_pressed = pressed::RESET;
+		m_reset_button.set_pressed();
 		m_curr_pressed_add = NULL;
 		return;
 	}

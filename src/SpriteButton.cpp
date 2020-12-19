@@ -1,26 +1,26 @@
-#include "RemoveButton.h"
+#include "SpriteButton.h"
 
 
-void RemoveButton::draw_remove(sf::RenderWindow &window)
+void SpriteButton::draw_remove(sf::RenderWindow &window)
 {
 	window.draw(get_sprite());
 };
 
-void RemoveButton::set_texture(std::shared_ptr <sf::Texture > &pressed, std::shared_ptr <sf::Texture > &not_pressed)
+void SpriteButton::set_texture(std::shared_ptr <sf::Texture > &pressed, std::shared_ptr <sf::Texture > &not_pressed)
 {
 
 	m_texture_pressed = &(*pressed);
 	m_texture_not_pressed = &(*not_pressed);
 }
 
-bool RemoveButton::button_pressed(sf::Vector2f &location) {
+bool SpriteButton::button_pressed(sf::Vector2f &location) {
 	if (get_sprite().getGlobalBounds().contains(location))
 	{
 		return true;
 	}
 	return false;
 }
-void RemoveButton::set_pressed()
+void SpriteButton::set_pressed()
 {
 	if (m_pressed)
 		m_pressed = false;
@@ -28,7 +28,7 @@ void RemoveButton::set_pressed()
 		m_pressed = true;
 
 }
-sf::Sprite RemoveButton::get_sprite()
+sf::Sprite SpriteButton::get_sprite()
 {
 	sf::Sprite sprite;
 	if(m_pressed)
