@@ -15,8 +15,8 @@ private:
 	sf::RectangleShape get_inner_rect();
 	sf::RectangleShape get_outer_rect();
 	sf::Vector2f m_location = sf::Vector2f(0, 0);
-	sf::Color m_inside_color = sf::Color(196, 196, 196);
-	sf::Color m_outside_color = sf::Color(169, 169, 169);
+	sf::Color m_inside_color = sf::Color(0, 51, 153,200);
+	sf::Color m_outside_color = sf::Color(0, 0, 153,200);
 	float m_width;
 	float m_height;
 

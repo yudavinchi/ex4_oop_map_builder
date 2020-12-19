@@ -1,8 +1,8 @@
 #include "Map.h"
 #include <iostream> //for debugging
 
-Map::Map(float width, float height, float size_of_char,sf::Font& font):
-	m_width(width), m_height(height),size_of_char(size_of_char), m_font(font)
+Map::Map(float width, float height, float size_of_char):
+	m_width(width), m_height(height),size_of_sprite(size_of_char)
 {
 	std::vector <std::vector<char> > map;
 
@@ -13,10 +13,18 @@ Map::Map(float width, float height, float size_of_char,sf::Font& font):
 	for (int i = 0; i < height; ++i)
 	{
 		map[i].resize(width);
+		for (int j = 0; j < width; j++) {
+			map[i][j]= ' ';
+		}
+		
 	}
-
 	m_map = map;
+}
 
+
+float Map::get_sprite_size()
+{
+	return size_of_sprite;
 }
 
 void Map::insert(int x, int y, char character) {
@@ -27,65 +35,97 @@ void Map::insert(int x, int y, char character) {
 
 void Map::Draw(sf::RenderWindow & window)
 {
-	
 	for (int i = 0; i < m_height; ++i)
 	{
 		for (int j = 0; j < m_width; j++)
 		{
 			window.draw(get_map(i,j));
-			window.draw(get_text(i, j, m_map[i][j]));
 		}
 	}
 	
 	if (curr_mose_over_x != -1 && curr_mose_over_y != -1)
 	{
 		window.draw(get_transperant());
-		window.draw(get_transperant_text());
 	}
 }
 
-sf::Text Map::get_text(int i, int j, char symbol)
+
+void Map::set_textures(std::vector<std::shared_ptr<sf::Texture>> &textures)
 {
-	sf::Text text(symbol, m_font);
-
-	text.setColor(sf::Color::White);
-
-	text.setPosition(get_location(i, j));
-
-	return text;
+	m_textures = textures;
+}
+sf::Sprite Map::get_map(int i, int j)
+{
+	sf::Sprite sprite;
+	
+	switch (get_char(i, j))
+	{
+		{
+	case NONE:
+		sprite.setTexture(*m_textures[WALL_TEXTURE]);
+		break;
+	case PLAYER:
+		sprite.setTexture(*m_textures[PLAYER_TEXTURE]);
+		break;
+	case ENEMY:
+		sprite.setTexture(*m_textures[ENEMY_TEXTURE]);
+		break;
+	case WALL:
+		sprite.setTexture(*m_textures[GROUND_TEXTURE]);
+		break;
+	case LADDER:
+		sprite.setTexture(*m_textures[LADDER_TEXTURE]);
+		break;
+	case COIN:
+		sprite.setTexture(*m_textures[COIN_TEXTURE]);
+		break;
+	case POLE:
+		sprite.setTexture(*m_textures[POLE_TEXTURE]);
+		break;
+		}
+	}
+	sprite.scale(size_of_sprite / 50, size_of_sprite / 50);
+	sprite.setPosition(get_location(i, j));
+	return sprite;
 }
 
-sf::Text Map::get_transperant_text()
-{
-	sf::Text text(m_trans_char, m_font);
-
-	text.setColor(sf::Color::White);
-
-	text.setPosition(get_location(curr_mose_over_x, curr_mose_over_y));
-
-	return text;
-}
-
-sf::RectangleShape Map::get_map(int i, int j)
+sf::Sprite Map::get_transperant()
 {
 	
-	auto rectangle = sf::RectangleShape({size_of_char,size_of_char});
-	rectangle.setFillColor(sf::Color::Black);
-	rectangle.setPosition(get_location(i,j));
-	return rectangle;
-}
+	sf::Sprite sprite;
+	switch (m_trans_char)
+	{
+	case NONE:
+		sprite.setTexture(*m_textures[WALL_TEXTURE]);
+		break;
+	case PLAYER:
+		sprite.setTexture(*m_textures[PLAYER_TEXTURE]);
+		break;
+	case ENEMY:
+		sprite.setTexture(*m_textures[ENEMY_TEXTURE]);
+		break;
+	case WALL:
+		sprite.setTexture(*m_textures[GROUND_TEXTURE]);
+		break;
+	case LADDER:
+		sprite.setTexture(*m_textures[LADDER_TEXTURE]);
+		break;
+	case COIN:
+		sprite.setTexture(*m_textures[COIN_TEXTURE]);
+		break;
+	case POLE:
+		sprite.setTexture(*m_textures[POLE_TEXTURE]);
+		break;
+	}
+	sprite.setColor(sf::Color(255, 255, 255, 150));
+	sprite.setPosition(get_location(curr_mose_over_x, curr_mose_over_y));
+	sprite.scale(size_of_sprite / 50, size_of_sprite / 50);
+	return sprite;
 
-sf::RectangleShape Map::get_transperant()
-{
-	
-	auto rectangle = sf::RectangleShape({ size_of_char,size_of_char });
-	rectangle.setFillColor(sf::Color::Red);
-	rectangle.setPosition(get_location(curr_mose_over_x, curr_mose_over_y));
-	return rectangle;
 }
 sf::Vector2f Map::get_location(int i, int j)
 {
-	return sf::Vector2f(m_location.x + i * size_of_char, m_location.y + j *size_of_char);
+	return sf::Vector2f(m_location.x + i * size_of_sprite, m_location.y + j * size_of_sprite);
 }
 
 //sets the 0,0 location
@@ -95,13 +135,13 @@ void Map::set_location(Window& window)
 	float width = window.get_width();
 	width -= window.get_width() * 0.3 ; //reducing size of side pannel
 	width *= 0.5; // finds center;
-	width = width - 0.5 * m_width*size_of_char;
+	width = width - 0.5 * m_width* size_of_sprite;
 
 	float x = window.get_width() * 0.3 + width;
 
 	float height = window.get_height();
 	height *= 0.4; //find center
-	height -= 0.5 * m_height* size_of_char;
+	height -= 0.5 * m_height* size_of_sprite;
 
 	float y = height;
 
@@ -127,8 +167,18 @@ bool Map::handle_click(sf::Vector2f& location, pressed& pressed)
 					return true;
 
 				case pressed::PLAYER:
-					//CHECK THER IS NO ANOTHER PLAYER
+					if (!m_there_is_player) {
 					add_char_to_map(i, j, PLAYER);
+					m_there_is_player = true;
+					m_player_location = sf::Vector2i(i, j);
+					}
+					else
+					{
+					remove_char_from_map(m_player_location.x, m_player_location.y);
+					add_char_to_map(i, j, PLAYER);
+					m_there_is_player = true;
+					m_player_location = sf::Vector2i(i, j);
+					}
 					return true;
 				
 				case pressed::LADDER:
@@ -154,6 +204,8 @@ bool Map::handle_click(sf::Vector2f& location, pressed& pressed)
 					return true;
 				case pressed::DELETE:
 					remove_char_from_map(i, j);
+					if(m_player_location.x ==  i && m_player_location.y == j)
+						m_there_is_player = false;
 					return true;
 				}
 			}
@@ -179,6 +231,10 @@ void Map::set_transperant(const char game_char)
 	m_trans_char  = game_char;
 }
 
+char Map::get_char(int i, int j)
+{
+	return m_map[i][j];
+}
 
 void Map::handle_mouse_over(sf::Vector2f& location,pressed& pressed)
 {

@@ -1,26 +1,24 @@
 #include "Executable.h"
-#define ADD_BUTTON_PRESSED 10
-#define DELETE_BUTTON_PRESSED 30
 
 
 void Executable::run()
 {
 
 	
-	//Intro intro;
+	Intro intro;
 
-	//sf::Vector2i size = intro.run();
+	sf::Vector2i size = intro.run();
 
 	sf::Font font;
 
 	font.loadFromFile("arial.ttf");
 
-	Map map(10, 10, 30,font);
+	Map map(size.x,size.y,60 * 10 / size.x);
 	
 	sf::Event event;
 
 	//creates main window
-	Window window(1152, 872, "new");
+	Window window(1600, 1200, "Map Builder");
 
 	//sets location of the map based on window
 	map.set_location(window);
@@ -35,7 +33,7 @@ void Executable::run()
 	//main window
 	while (main_window.isOpen())
 	{
-		main_window.clear(sf::Color::White);
+		main_window.clear(sf::Color(0,102,204,200));
 	
 
 		//--------------------------------------------------------------------------------
@@ -71,7 +69,7 @@ void Executable::run()
 					{
 						case sf::Mouse::Button::Left:
 						{
-						handle_click_non_pressed(location, ui);
+							hadle_click(location, ui);
 						break;
 						}
 					break;
@@ -79,13 +77,10 @@ void Executable::run()
 				}
 			}
 		}
-
-
 	}
-
 }
 
-void Executable::handle_click_non_pressed(sf::Vector2f &location, Ui & ui)
+void Executable::hadle_click(sf::Vector2f &location, Ui & ui)
 {
 	ui.hadle_click(location);
 }

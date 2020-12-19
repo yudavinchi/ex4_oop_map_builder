@@ -12,77 +12,87 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 
 	load_textures(m_textures);
 
-	sf::Vector2f starting_location(10, 10);
+	m_map.set_textures(m_textures);
+
+	sf::Vector2f starting_location(20, 20);
 
 	std::vector <std::string > characters;
 
 	//reamke
-	characters.push_back("@");
-	characters.push_back("%");
 	characters.push_back("H");
-	characters.push_back("*");
 	characters.push_back("#");
+	characters.push_back("@");
 	characters.push_back("-");
+	characters.push_back("%");
+	characters.push_back("*");
+
 	
 	
 	for (int index = 0; index < number_of_add_buttons; ++index)
 	{
 		AddButton button(starting_location, 50, 50, font, characters[index]);
+		button.set_texture(m_textures[index]);
 		//need to add check for boudries
 		m_add_buttons.push_back(button);
-		starting_location.x += 60;
+		starting_location.x += 100;
 
-		if (starting_location.x + 50 > m_side_pannel.getWidth())
+		if (starting_location.x + 100 > m_side_pannel.getWidth())
 		{
-			starting_location.x -= 60;
-			starting_location.y += 60;
+			starting_location.x = 20;
+			starting_location.y += 90;
 		}
 	}
 	sf::Texture texture1;
 
-	
-
-	m_add_buttons[0].set_texture(m_textures[0]);
-	m_add_buttons[1].set_texture(m_textures[1]);
-	m_add_buttons[2].set_texture(m_textures[2]);
-	m_add_buttons[3].set_texture(m_textures[3]);
-	m_add_buttons[4].set_texture(m_textures[4]);
-	//m_add_buttons[5].set_texture(m_textures[5]);
-
 	//build side pannel	
-	sf::Vector2f location_remove(50, 150);
+	sf::Vector2f location_remove(100, 250);
 	
-	RemoveButton remove = RemoveButton(location_remove, 50, 100, font, "remove");
-	m_remove_button = remove;
+	m_remove_button = RemoveButton(location_remove, 50, 100, font, "remove");
+
+	m_remove_button.set_texture(m_textures[REMOVE_PRS_TEXTURE], m_textures[REMOVE_NT_PRS_TEXTURE]);
+
 };
 
-void Ui::load_textures(std::vector<std::unique_ptr<sf::Texture>>& m_textures)
+void Ui::load_textures(std::vector<std::shared_ptr<sf::Texture>>& m_textures)
 {
 	
+	auto texture_ptr1 = std::make_shared<sf::Texture>();
+	texture_ptr1->loadFromFile("ladder.png");
+	m_textures.push_back(texture_ptr1);
 
 
-	auto texture_ptr1 = std::make_unique<sf::Texture>();
-	texture_ptr1->loadFromFile("ladder with wall.png");
-	m_textures.push_back(std::move(texture_ptr1));
-
-
-	auto texture_ptr2 = std::make_unique<sf::Texture>();
+	auto texture_ptr2 = std::make_shared<sf::Texture>();
 	texture_ptr2->loadFromFile("ground.png");
 	m_textures.push_back(std::move(texture_ptr2));
 
-	auto texture_ptr3 = std::make_unique<sf::Texture>();
-	texture_ptr3->loadFromFile("ladder with wall.png");
+	auto texture_ptr3 = std::make_shared<sf::Texture>();
+	texture_ptr3->loadFromFile("player.png");
 	m_textures.push_back(std::move(texture_ptr3));
 
-	auto texture_ptr4 = std::make_unique<sf::Texture>();
-	texture_ptr4->loadFromFile("rope with wall.png");
+	auto texture_ptr4 = std::make_shared<sf::Texture>();
+	texture_ptr4->loadFromFile("rope.png");
 	m_textures.push_back(std::move(texture_ptr4));
 
-	auto texture_ptr5 = std::make_unique<sf::Texture>();
+	auto texture_ptr6 = std::make_shared<sf::Texture>();
+	texture_ptr6->loadFromFile("enemy.png");
+	m_textures.push_back(std::move(texture_ptr6));
+
+	auto texture_ptr7 = std::make_shared<sf::Texture>();
+	texture_ptr7->loadFromFile("coin.png");
+	m_textures.push_back(std::move(texture_ptr7));
+
+	auto texture_ptr5 = std::make_shared<sf::Texture>();
 	texture_ptr5->loadFromFile("wall.png");
 	m_textures.push_back(std::move(texture_ptr5));
 
+	auto texture_ptr8 = std::make_shared<sf::Texture>();
+	texture_ptr8->loadFromFile("Remove P.png");
+	m_textures.push_back(std::move(texture_ptr8));
 
+
+	auto texture_ptr9 = std::make_shared<sf::Texture>();
+	texture_ptr9->loadFromFile("Remove NP.png");
+	m_textures.push_back(std::move(texture_ptr9));
 };
 
 void Ui::Draw(sf::RenderWindow& window)
@@ -100,7 +110,7 @@ void Ui::Draw(sf::RenderWindow& window)
 	}
 
 	//draws delete button
-	//m_remove_button.Draw(window);
+	m_remove_button.draw_remove(window);
 	//draws save button
 
 }
@@ -114,6 +124,9 @@ void Ui::hadle_click(sf::Vector2f & location)
 	{
 		if (m_add_buttons[i].button_pressed(location))
 		{
+			if (m_pressed == pressed::DELETE)
+				m_remove_button.set_pressed();
+
 			switch (m_add_buttons[i].get_char())
 			{
 			case PLAYER:
@@ -135,7 +148,7 @@ void Ui::hadle_click(sf::Vector2f & location)
 				set_pressed(pressed::POLE, m_add_buttons[i]);
 				break;
 			}
-			m_add_buttons[i].set_pressed();
+			//m_add_buttons[i].set_pressed();
 			//no nneed to continue
 			return;
 		}
@@ -147,10 +160,14 @@ void Ui::hadle_click(sf::Vector2f & location)
 		return;
 	}
 
+	
+
 	//handles click on delete button
 	
 	if (m_remove_button.button_pressed(location))
 	{
+		if (m_pressed != pressed::DELETE) {}
+			//resets other button
 		set_pressed(pressed::DELETE, m_remove_button);
 		m_remove_button.set_pressed();
 		return;
@@ -172,8 +189,6 @@ void Ui::set_pressed(enum pressed what_pressed, Button & button)
 {
 	//we pressed new one
 	if (m_pressed != what_pressed)
-		if(m_curr_pressed_add != NULL )
-		(*m_curr_pressed_add).reset_pressed();
 
 	m_pressed = what_pressed;
 	m_curr_pressed_add = &button;

@@ -68,15 +68,7 @@ void Button::set_inner_color(const sf::Color & color)
 	m_inner_color = color;
 }
 
-void Button::set_pressed()
-{
-	set_inner_color(sf::Color::Red);
-}
 
-void Button::reset_pressed()
-{
-	set_inner_color(sf::Color(87, 87, 87));
-}
 
 //check if click was inside our button
 bool Button::contain_click_button(sf::Vector2i &location)
