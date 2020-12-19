@@ -8,6 +8,7 @@ Button::Button(sf::Vector2f& vector, int height, int width, sf::Font& font, std:
 	m_text = name;
 };
 
+
 void Button::Draw(sf::RenderWindow& window)
 {
 	window.draw(get_outer_rect());

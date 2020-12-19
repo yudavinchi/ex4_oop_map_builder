@@ -21,6 +21,7 @@ public:
 	void handle_mouse_over(sf::Vector2f& location, pressed& pressed);
 	void remove_char_from_map(int i, int j);
 
+
 private:
 	//for now
 	sf::Font m_font;

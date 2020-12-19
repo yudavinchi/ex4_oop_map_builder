@@ -1,5 +1,10 @@
 #pragma once
 
+#define ENEMY_TEXTURE 0
+#define GROUND_TEXTURE 1
+#define LADDER_TEXTURE 2
+#define ROPE_TEXTURE 3
+#define WALL_TEXTURE 4
 
 enum class pressed
 {
@@ -15,7 +20,7 @@ enum class pressed
 };
 
 
-const int number_of_add_buttons = 6;
+const int number_of_add_buttons = 5;
 
 const char PLAYER = char('@');
 const char COIN = char('*');

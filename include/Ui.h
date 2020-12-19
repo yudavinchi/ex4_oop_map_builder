@@ -19,9 +19,10 @@ public:
 	void hadle_click(sf::Vector2f & location);
 	void set_pressed(enum pressed what_pressed, Button & button);
 	void handle_mouse_over(sf::Vector2f& location);
-
-private:
 	
+private:
+	void load_textures(std::vector<std::unique_ptr<sf::Texture >>& m_textures);
+
 	//holds the button that is curr pressed
 	Button* m_curr_pressed_add = NULL;
 	
@@ -41,7 +42,8 @@ private:
 	
 	//holds the side pannel
 	SidePannel m_side_pannel;
-	
+
+	std::vector<std::unique_ptr<sf::Texture>> m_textures;
 	//holds the font
 	sf::Font m_font;
 };

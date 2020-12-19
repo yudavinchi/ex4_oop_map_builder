@@ -114,7 +114,6 @@ void Map::set_location(Window& window)
 bool Map::handle_click(sf::Vector2f& location, pressed& pressed)
 {
 	
-	std::cout << "handle mouse over" << location.x << " " << location.y << std::endl;
 	for (int i = 0; i < m_height; ++i)
 	{
 		for (int j = 0; j < m_width; j++)
@@ -184,7 +183,7 @@ void Map::set_transperant(const char game_char)
 void Map::handle_mouse_over(sf::Vector2f& location,pressed& pressed)
 {
 	if (pressed != pressed::DELETE) {
-		//std::cout << "handle mouse over" << location.x << " " << location.y << std::endl;
+		
 		for (int i = 0; i < m_height; ++i)
 		{
 			for (int j = 0; j < m_width; j++)

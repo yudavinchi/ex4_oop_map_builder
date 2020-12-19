@@ -10,7 +10,7 @@ SidePannel::SidePannel(float height_of_window, float widht_of_window)
 
 int SidePannel::getWidth()
 {
-	return m_width;
+	return m_width; 
 }
 
 void SidePannel::Draw(sf::RenderWindow& window)

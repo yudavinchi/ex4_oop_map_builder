@@ -7,17 +7,16 @@ void Executable::run()
 {
 
 	
-	Intro intro;
+	//Intro intro;
 
-
-	sf::Vector2i size = intro.run();
-
-	std::cout << size.x << " " << size.y << std::endl;
+	//sf::Vector2i size = intro.run();
 
 	sf::Font font;
+
 	font.loadFromFile("arial.ttf");
+
 	Map map(10, 10, 30,font);
-	int flag;
+	
 	sf::Event event;
 
 	//creates main window

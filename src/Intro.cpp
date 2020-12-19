@@ -34,7 +34,7 @@ sf::Vector2i Intro::run()
 	while (intro_window.isOpen())
 	{
 		//clears
-		intro_window.clear();
+		intro_window.clear(); 
 
 		//draws
 		send_button.Draw(intro_window);

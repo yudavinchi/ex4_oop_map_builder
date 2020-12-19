@@ -2,9 +2,27 @@
 
 
 
-
-char AddButton::get_char()
-{
+char AddButton::get_char() {
 	return m_text[0];
 }
+void AddButton::Draw_add(sf::RenderWindow & window)
+{
+	window.draw(get_sprite());
+}
 
+void AddButton::set_texture( std::unique_ptr <sf::Texture >& texture)
+{
+
+	m_texture = &(*texture);
+}
+
+
+sf::Sprite AddButton::get_sprite()
+{
+	sf::Sprite sprite;
+	sprite.setTexture(*m_texture);
+	sprite.setPosition(m_position);
+	sprite.scale(sf::Vector2f(1, 1));
+	
+	return sprite;
+}
