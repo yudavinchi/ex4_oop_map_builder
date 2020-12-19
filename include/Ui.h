@@ -1,7 +1,7 @@
 #pragma once
 #include "Button.h"
 #include "AddButton.h"
-#include "RemoveButton.h"
+#include "SpriteButton.h"
 #include "SidePannel.h"
 #include "map.h"
 #include "Window.h"
@@ -35,7 +35,9 @@ private:
 	//holds the add buttons
 	std::vector<AddButton> m_add_buttons;
 
-	RemoveButton m_remove_button;
+	SpriteButton m_remove_button;
+
+	SpriteButton m_reset_button;
 
 	//holds the map
 	Map m_map;

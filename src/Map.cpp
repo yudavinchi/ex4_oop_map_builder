@@ -303,3 +303,15 @@ void Map::handle_mouse_over(sf::Vector2f& location,pressed& pressed)
 		curr_mose_over_y = -1;
 	}
 }
+
+
+void Map::reset()
+{
+	for (int i = 0; i < m_height; ++i)
+	{
+		for (int j = 0; j < m_width; j++)
+		{
+			m_map[i][j] = NONE;
+		}
+	}
+}
