@@ -5,7 +5,7 @@ SidePannel::SidePannel(float height_of_window, float widht_of_window)
 {
 	m_height = height_of_window;
 	//setting the 30% of window as side pannel;
-	m_width = 0.3 * widht_of_window;
+	m_width = 0.2 * widht_of_window;
 }
 
 int SidePannel::getWidth()

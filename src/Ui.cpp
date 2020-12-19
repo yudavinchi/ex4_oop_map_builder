@@ -14,7 +14,7 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 
 	m_map.set_textures(m_textures);
 
-	sf::Vector2f starting_location(20, 20);
+	sf::Vector2f starting_location(40, 20);
 
 	std::vector <std::string > characters;
 
@@ -39,22 +39,22 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 
 		if (starting_location.x + 100 > m_side_pannel.getWidth())
 		{
-			starting_location.x = 20;
+			starting_location.x = 40;
 			starting_location.y += 90;
 		}
 	}
 	sf::Texture texture1;
 
 	//build side pannel	
-	sf::Vector2f location_remove(50, 250);
-	sf::Vector2f location_reset(50, 350);
+	sf::Vector2f location_remove(40, 300);
+	sf::Vector2f location_reset(40, 380);
 	m_remove_button = SpriteButton(location_remove, 50, 100);
 
 	m_remove_button.set_texture(m_textures[REMOVE_PRS_TEXTURE], m_textures[REMOVE_NT_PRS_TEXTURE]);
 
 	m_reset_button = SpriteButton(location_reset, 50, 100);
 
-	m_reset_button.set_texture(m_textures[RESET_PRS_TEXTURE], m_textures[RESET_NT_PRS_TEXTURE]);
+	m_reset_button.set_texture(m_textures[RESET_NT_PRS_TEXTURE], m_textures[RESET_NT_PRS_TEXTURE]);
 
 };
 
@@ -145,10 +145,7 @@ void Ui::hadle_click(sf::Vector2f & location)
 				std::cout << "svae";
 			else if(m_pressed == pressed::RESET)
 				m_reset_button.set_pressed();
-			
-			{
 
-			}
 			switch (m_add_buttons[i].get_char())
 			{
 			case PLAYER:

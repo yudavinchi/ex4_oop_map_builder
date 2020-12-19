@@ -8,13 +8,18 @@ void Executable::run()
 	Intro intro;
 
 	sf::Vector2i size = intro.run();
-
+	//sf::Vector2i size(10, 20);
 	sf::Font font;
 
-	font.loadFromFile("arial.ttf");
+	float scale = 0;
 
-	Map map(size.x,size.y,60 * 10 / size.x);
-	
+	if (size.x > size.y)
+		scale = size.x;
+	else
+		scale = size.y;
+
+	Map map(size.x,size.y,60 * 10 / scale);
+
 	sf::Event event;
 
 	//creates main window
@@ -33,7 +38,7 @@ void Executable::run()
 	//main window
 	while (main_window.isOpen())
 	{
-		main_window.clear(sf::Color(0,102,204,200));
+		main_window.clear(sf::Color::Black);
 	
 
 		//--------------------------------------------------------------------------------
