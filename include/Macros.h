@@ -11,6 +11,8 @@
 #define REMOVE_NT_PRS_TEXTURE 8
 #define RESET_PRS_TEXTURE 9
 #define RESET_NT_PRS_TEXTURE 10
+#define SAVE_PRS_TEXTURE 11
+#define SAVE_NT_PRS_TEXTURE 12
 
 
 enum class pressed
