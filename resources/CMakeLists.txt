@@ -1,6 +1,4 @@
 ﻿configure_file ("arial.ttf"${CMAKE_BINARY_DIR} COPYONLY)
-
-configure_file ("arial.ttf" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("./skins/enemy.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("./skins/ground.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("./skins/ladder.png" ${CMAKE_BINARY_DIR} COPYONLY)
@@ -11,4 +9,4 @@ configure_file ("./skins/coin.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("./buttons/Remove NP.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("./buttons/Remove P.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("./buttons/Reset NP.png" ${CMAKE_BINARY_DIR} COPYONLY)
-configure_file ("./buttons/Reset P.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("./buttons/Remove P.png" ${CMAKE_BINARY_DIR} COPYONLY)
