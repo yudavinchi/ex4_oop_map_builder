@@ -18,7 +18,7 @@ void Executable::run()
 	sf::Event event;
 
 	//creates main window
-	Window window(1600, 1200, "Map Builder");
+	Window window(1200, 900, "Map Builder");
 
 	//sets location of the map based on window
 	map.set_location(window);

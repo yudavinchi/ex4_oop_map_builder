@@ -46,7 +46,7 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 	sf::Texture texture1;
 
 	//build side pannel	
-	sf::Vector2f location_remove(100, 250);
+	sf::Vector2f location_remove(50, 250);
 	
 	m_remove_button = RemoveButton(location_remove, 50, 100);
 
@@ -127,7 +127,14 @@ void Ui::hadle_click(sf::Vector2f & location)
 		{
 			if (m_pressed == pressed::DELETE)
 				m_remove_button.set_pressed();
+			else if (m_pressed == pressed::SAVE)
+				std::cout << "svae";
+			else
+				
+			
+			{
 
+			}
 			switch (m_add_buttons[i].get_char())
 			{
 			case PLAYER:
@@ -167,10 +174,20 @@ void Ui::hadle_click(sf::Vector2f & location)
 	
 	if (m_remove_button.button_pressed(location))
 	{
-		if (m_pressed != pressed::DELETE) {}
+		if (m_pressed != pressed::DELETE)
+		{
+			if(m_pressed == pressed::SAVE){
+			}
+			
+			else {
+				if(m_curr_pressed_add != NULL)
+				m_curr_pressed_add->set_pressed();
+			}
+		}
 			//resets other button
-		set_pressed(pressed::DELETE, m_remove_button);
+		m_pressed = pressed::DELETE;
 		m_remove_button.set_pressed();
+		m_curr_pressed_add = NULL;
 		return;
 	}
 	//if save
@@ -186,11 +203,23 @@ void Ui::handle_mouse_over(sf::Vector2f& location)
 
 
 //sets curr pressed item
-void Ui::set_pressed(enum pressed what_pressed, Button & button)
+void Ui::set_pressed(enum pressed what_pressed, AddButton & button)
 {
 	//we pressed new one
-	if (m_pressed != what_pressed)
+	if (m_pressed != what_pressed) {
+		if(m_curr_pressed_add != NULL)
+			m_curr_pressed_add->set_pressed();
 
-	m_pressed = what_pressed;
-	m_curr_pressed_add = &button;
+		m_pressed = what_pressed;
+		m_curr_pressed_add = &button;
+		m_curr_pressed_add->set_pressed();
+	}
+	else
+	{
+		m_curr_pressed_add->set_pressed();
+		m_curr_pressed_add == NULL;
+		m_pressed = pressed::NONE;
+	}
+	
+	
 }

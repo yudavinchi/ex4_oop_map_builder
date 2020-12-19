@@ -16,6 +16,8 @@ public:
 	char get_char();
 	bool button_pressed(sf::Vector2f &location);
 private:
+	sf::Color m_color = sf::Color(255, 255, 255, 0);
+	sf::RectangleShape get_rectangle();
 	sf::Texture * m_texture;
 	char m_action;
 };
