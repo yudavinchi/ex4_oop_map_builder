@@ -18,7 +18,8 @@ sf::Vector2i Intro::run()
 
 	sf::Vector2i location_of_mouse;
 
-	Button send_button(m_location_send_button, 40, 120, m_font, "SEND");
+	IntroButton send_button(m_location_send_button, 40, 120);
+	send_button.set_text("SEND" , m_font);
 
 	sf::Color white_color = sf::Color::White;		    // white
 	sf::Color gray_color = sf::Color({160, 160, 160});  // Gray

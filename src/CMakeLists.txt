@@ -8,6 +8,7 @@
                                   "AddButton.cpp"
                                   "RemoveButton.cpp"
                                   "Intro.cpp"
+                                  "IntroButton.cpp"
                                   )
                                    
                                    

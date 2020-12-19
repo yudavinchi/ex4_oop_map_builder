@@ -14,7 +14,8 @@ void RemoveButton::set_texture(std::shared_ptr <sf::Texture > &pressed, std::sha
 }
 
 bool RemoveButton::button_pressed(sf::Vector2f &location) {
-	if (get_sprite().getGlobalBounds().contains(location)) {
+	if (get_sprite().getGlobalBounds().contains(location))
+	{
 		return true;
 	}
 	return false;

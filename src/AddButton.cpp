@@ -3,7 +3,7 @@
 
 
 char AddButton::get_char() {
-	return m_text[0];
+	return m_action;
 }
 void AddButton::Draw_add(sf::RenderWindow & window)
 {
@@ -18,7 +18,10 @@ void AddButton::set_texture( std::shared_ptr<sf::Texture >& texture)
 
 	m_texture = &(*texture);
 }
-
+void AddButton::set_action(const char &action)
+{
+	m_action = action;
+}
 
 sf::Sprite AddButton::get_sprite()
 {
@@ -28,4 +31,12 @@ sf::Sprite AddButton::get_sprite()
 	sprite.scale(sf::Vector2f(1.5, 1.5));
 	
 	return sprite;
+}
+
+bool AddButton::button_pressed(sf::Vector2f &location) {
+	if (get_sprite().getGlobalBounds().contains(location))
+	{
+		return true;
+	}
+	return false;
 }

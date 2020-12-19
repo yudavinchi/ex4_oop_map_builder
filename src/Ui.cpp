@@ -30,8 +30,9 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 	
 	for (int index = 0; index < number_of_add_buttons; ++index)
 	{
-		AddButton button(starting_location, 50, 50, font, characters[index]);
+		AddButton button(starting_location, 50, 50);
 		button.set_texture(m_textures[index]);
+		button.set_action(characters[index][0]);
 		//need to add check for boudries
 		m_add_buttons.push_back(button);
 		starting_location.x += 100;
@@ -47,7 +48,7 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 	//build side pannel	
 	sf::Vector2f location_remove(100, 250);
 	
-	m_remove_button = RemoveButton(location_remove, 50, 100, font, "remove");
+	m_remove_button = RemoveButton(location_remove, 50, 100);
 
 	m_remove_button.set_texture(m_textures[REMOVE_PRS_TEXTURE], m_textures[REMOVE_NT_PRS_TEXTURE]);
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Window.h"
-#include "Button.h"
+#include "IntroButton.h"
 #include <string>
 #include <SFML/Graphics.hpp>
 
