@@ -40,6 +40,7 @@ private:
 
 	SpriteButton m_reset_button;
 
+	SpriteButton m_save_button;
 	//holds the map
 	Map m_map;
 	

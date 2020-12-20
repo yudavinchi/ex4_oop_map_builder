@@ -48,6 +48,8 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 	//build side pannel	
 	sf::Vector2f location_remove(40, 300);
 	sf::Vector2f location_reset(40, 380);
+	sf::Vector2f location_save(40, 460);
+
 	m_remove_button = SpriteButton(location_remove, 50, 100);
 
 	m_remove_button.set_texture(m_textures[REMOVE_PRS_TEXTURE], m_textures[REMOVE_NT_PRS_TEXTURE]);
@@ -55,6 +57,10 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 	m_reset_button = SpriteButton(location_reset, 50, 100);
 
 	m_reset_button.set_texture(m_textures[RESET_PRS_TEXTURE], m_textures[RESET_NT_PRS_TEXTURE]);
+
+	m_save_button = SpriteButton(location_save, 50, 100);
+
+	m_save_button.set_texture(m_textures[SAVE_PRS_TEXTURE], m_textures[SAVE_NT_PRS_TEXTURE]);
 
 };
 
@@ -107,6 +113,15 @@ void Ui::load_textures(std::vector<std::shared_ptr<sf::Texture>>& m_textures)
 	auto texture_ptr11 = std::make_shared<sf::Texture>();
 	texture_ptr11->loadFromFile("Reset NP.png");
 	m_textures.push_back(std::move(texture_ptr11));
+
+	auto texture_ptr12 = std::make_shared<sf::Texture>();
+	texture_ptr12->loadFromFile("Save P.png");
+	m_textures.push_back(std::move(texture_ptr12));
+
+
+	auto texture_ptr13 = std::make_shared<sf::Texture>();
+	texture_ptr13->loadFromFile("Save NP.png");
+	m_textures.push_back(std::move(texture_ptr13));
 };
 
 void Ui::Draw(sf::RenderWindow& window)
@@ -126,6 +141,7 @@ void Ui::Draw(sf::RenderWindow& window)
 	//draws delete button
 	m_remove_button.draw_remove(window);
 	m_reset_button.draw_remove(window);
+	m_save_button.draw_remove(window);
 	//draws save button
 
 }
@@ -142,7 +158,7 @@ void Ui::hadle_click(sf::Vector2f & location)
 			if (m_pressed == pressed::DELETE)
 				m_remove_button.set_pressed();
 			else if (m_pressed == pressed::SAVE)
-				std::cout << "svae";
+				m_save_button.set_pressed();
 			else if(m_pressed == pressed::RESET)
 				m_reset_button.set_pressed();
 
@@ -223,9 +239,28 @@ void Ui::hadle_click(sf::Vector2f & location)
 		m_curr_pressed_add = NULL;
 		return;
 	}
-	//if save
-
 	
+	if (m_save_button.button_pressed(location))
+	{
+		// m_map.save();
+
+		if (m_pressed == pressed::DELETE)
+		{
+			m_remove_button.set_pressed();
+		}
+		else
+		{
+			if (m_pressed != pressed::NONE)
+				m_curr_pressed_add->set_pressed();
+		}
+
+		//resets other button
+		m_pressed = pressed::SAVE;
+		m_save_button.set_pressed();
+		m_curr_pressed_add = NULL;
+		return;
+	}
+
 }
 
 
@@ -251,7 +286,7 @@ void Ui::set_pressed(enum pressed what_pressed, AddButton & button)
 	else
 	{
 		m_curr_pressed_add->set_pressed();
-		m_curr_pressed_add == NULL;
+		m_curr_pressed_add = NULL;
 		m_pressed = pressed::NONE;
 	}
 }
@@ -264,6 +299,16 @@ void Ui::handle_relese(sf::Vector2f& location)
 		if (m_pressed == pressed::RESET)
 		{
 			m_reset_button.set_pressed();
+			m_pressed = pressed::NONE;
+			return;
+		}
+	}
+
+	if (m_save_button.button_pressed(location))
+	{
+		if (m_pressed == pressed::SAVE)
+		{
+			m_save_button.set_pressed();
 			m_pressed = pressed::NONE;
 			return;
 		}
