@@ -1,6 +1,6 @@
 #include "Intro.h"
 
-// c-tor
+// c-tors
 Intro::Intro()
 	 :Window(MAX_WIDTH, MAX_HEIGHT, "Initializer")
 {
@@ -10,6 +10,7 @@ Intro::Intro()
 	m_location_height_input  = sf::Vector2f(250, 20);
 	m_location_send_button   = sf::Vector2f(160, 100);
 }
+//---------------------------------------------------------------
 
 // runs the intro
 sf::Vector2i Intro::run()
@@ -157,8 +158,9 @@ sf::Vector2i Intro::run()
 
 	return values;
 }
+//---------------------------------------------------------------
 
-
+// returns text according to string and location
 sf::Text Intro::init_text(std::string &string, sf::Vector2f &location) const
 {
 	auto text = sf::Text(string, m_font);
@@ -168,7 +170,9 @@ sf::Text Intro::init_text(std::string &string, sf::Vector2f &location) const
 
 	return text;
 }
+//---------------------------------------------------------------
 
+// return rectangle according to parameters
 sf::RectangleShape Intro::init_input_box(sf::Vector2f size, sf::Vector2f &location) const
 {
 	sf::Color gray_color = sf::Color({ 160, 160, 160 }); // Gray
@@ -179,7 +183,9 @@ sf::RectangleShape Intro::init_input_box(sf::Vector2f size, sf::Vector2f &locati
 
 	return box;
 }
+//---------------------------------------------------------------
 
+// converts into int
 int Intro::convert_into_int(std::string &string) const
 {
 	int num = 0;
@@ -191,4 +197,5 @@ int Intro::convert_into_int(std::string &string) const
 	}
 	return num;
 }
+//---------------------------------------------------------------
 

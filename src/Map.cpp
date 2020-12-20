@@ -48,13 +48,27 @@ Map::Map(float height, float width, float size_of_sprite):
 		// Read the next line from File untill it reaches empty row.
 		while (!file.eof()); 
 
-		m_width = map[0].size();
+		m_width = map[1].size();
 		m_height = map.size();
 
 		if (m_width > m_height && m_height != 0)
 			m_size_of_sprite = (80 * 10 / m_width);
 		else if (m_width <= m_height && m_width != 0)
 			m_size_of_sprite = (80 * 10 / m_height);
+		else if (m_width == 0 && m_height == 0)
+		{
+			for (int i = 0; i < 10; i++)
+			{		
+				for (int j = 0; j < 10; j++)
+				{
+					chars.push_back(' ');
+				}
+				map.push_back(chars);
+			}
+			m_width = 10;
+			m_height = 10;
+			m_size_of_sprite = (80);
+		}
 
 		m_map = map;
 		
