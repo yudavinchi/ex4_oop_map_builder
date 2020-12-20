@@ -21,7 +21,7 @@ void Executable::run()
 	else
 		scale = size.y;
 
-	Map map(size.x, size.y, (60 * 10 / scale));
+	Map map(size.x, size.y, (80 * 10 / scale));
 	//sets location of the map based on window
 	map.set_location(window);
 

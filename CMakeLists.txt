@@ -9,7 +9,7 @@ if (MSVC)
     add_compile_options (/permissive-)
 endif ()
 
-add_executable (oop1_ex04 "")
+add_executable (oop1_ex04 WIN32)
 
 add_subdirectory (include)
 add_subdirectory (src)

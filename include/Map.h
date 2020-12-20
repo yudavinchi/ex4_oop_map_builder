@@ -44,8 +44,6 @@ private:
 	//private getters:
 	sf::Sprite get_map(int i, int j);
 	sf::Sprite get_transperant();
-
-	Map &operator=(const Map &other);
 	
 	//members:
 	float m_width;
