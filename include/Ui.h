@@ -37,7 +37,7 @@ private:
 	std::vector<AddButton> m_add_buttons;
 
 	SpriteButton m_remove_button;
-
+	SpriteButton m_save_button;
 	SpriteButton m_reset_button;
 
 	//holds the map
