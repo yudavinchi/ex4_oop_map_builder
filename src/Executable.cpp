@@ -3,31 +3,36 @@
 
 void Executable::run()
 {
-	Intro intro;
-
-	sf::Vector2i size = intro.run();
-	//sf::Vector2i size(10, 20);
-	sf::Font font;
-
-	float scale = 0;
-
-	if (size.x > size.y)
-		scale = size.x;
-	else
-		scale = size.y;
-
-	Map map(size.x,size.y,60 * 10 / scale);
-
 	sf::Event event;
+	sf::Font font;
 
 	//creates main window
 	Window window(1200, 900, "Map Builder");
 
+	Intro intro;
+	sf::Vector2i size = intro.run();
+
+	float scale = 0;
+
+	if (size.x == size.y && size.x == -1)
+		scale = 13;
+	else if (size.x > size.y)
+		scale = size.x;
+	else
+		scale = size.y;
+
+	Map map(size.x, size.y, (60 * 10 / scale));
 	//sets location of the map based on window
 	map.set_location(window);
 
+	std::fstream file;
+
+	file.open("Board.txt", std::ios::out | std::ios::app);
+	file.close();
+	file.open("Board.txt", std::ios::in | std::ios::out | std::ios::app);
+
 	//sets ui
-	Ui ui(window,font, map);
+	Ui ui(window, font, map);
 	
 	//renders main window
 	sf::RenderWindow main_window(sf::VideoMode(window.get_width(), window.get_height()), window.get_name());

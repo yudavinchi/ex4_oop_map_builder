@@ -5,21 +5,90 @@
 Map::Map(float height, float width, float size_of_sprite):
 	m_width(width), m_height(height),m_size_of_sprite(size_of_sprite)
 {
-	std::vector <std::vector<char> > map;
-	map.resize(height);
-
-	//setting sizes
-	for (int i = 0; i < height; ++i)
+	if (height != -1 && width != -1)
 	{
-		map[i].resize(width);
-		for (int j = 0; j < width; j++) {
-			map[i][j]= ' ';
+		std::vector <std::vector<char> > map;
+		map.resize(height);
+
+		//setting sizes
+		for (int i = 0; i < height; ++i)
+		{
+			map[i].resize(width);
+			for (int j = 0; j < width; j++) {
+				map[i][j] = ' ';
+			}
 		}
-		
+		m_map = map;
 	}
-	m_map = map;
+	else
+	{
+		std::vector <std::vector<char>> map;
+		std::vector<char> chars;
+		std::string line;
+
+		std::fstream file;
+		file.open("Board.txt");
+
+		do
+		{
+			//reads each line from the Board.txt
+			getline(file, line);
+
+			for (int j = 0; j < line.size(); j++)
+			{
+				chars.push_back(line[j]);
+			}
+
+			map.push_back(chars);
+
+			chars.clear();
+		}
+		// Read the next line from File untill it reaches empty row.
+		while (!file.eof());
+
+		m_width = map[0].size();
+		m_height = map.size();
+
+		m_map = map;
+	}
 }
 //---------------------------------------------------------------
+
+Map::Map(std::string path, float size_of_sprite)
+	:m_width(0), m_height(0), m_size_of_sprite(size_of_sprite)
+{
+	std::vector <std::vector<char>> map;
+
+	std::fstream file;
+
+	file.open(path);
+
+	std::vector<char> chars;
+	std::string line;
+
+	do
+	{
+		//reads each line from the Board.txt
+		getline(file, line);
+
+		for (int j = 0; j < line.size(); j++)
+		{
+			chars.push_back(line[j]);
+		}
+
+		map.push_back(chars);
+
+		chars.clear();
+	}
+	// Read the next line from File untill it reaches empty row.
+	while (!file.eof());
+
+	m_width = map[0].size();
+	m_height = map.size();
+
+	m_map = map;
+}
+
 
 //------------------------------Setters--------------------------
 void Map::set_textures(std::vector<std::shared_ptr<sf::Texture>>& textures)

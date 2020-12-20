@@ -5,6 +5,7 @@ Class for holding the map, drawing it, hadleing the mouse over and mouse click.
 #pragma once
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <fstream>
 #include "Window.h"
 #include "Macros.h"
 
@@ -13,6 +14,7 @@ class Map
 public:
 	//C-tors
 	Map(float m_width, float m_height, float size_of_char);
+	Map(std::string path, float size_of_sprite);
 
 	//Setters:
 	void set_location(Window& window);
@@ -40,6 +42,8 @@ private:
 	//private getters:
 	sf::Sprite get_map(int i, int j);
 	sf::Sprite get_transperant();
+
+	Map &operator=(const Map &other);
 	
 	//members:
 	float m_width;
