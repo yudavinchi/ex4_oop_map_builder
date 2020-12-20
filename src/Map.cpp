@@ -2,7 +2,7 @@
 #include <iostream> //for debugging
 
 Map::Map(float height, float width, float size_of_sprite):
-	m_width(width), m_height(height),size_of_sprite(size_of_sprite)
+	m_width(width), m_height(height),m_size_of_sprite(size_of_sprite)
 {
 	std::vector <std::vector<char> > map;
 
@@ -24,7 +24,7 @@ Map::Map(float height, float width, float size_of_sprite):
 
 float Map::get_sprite_size()
 {
-	return size_of_sprite;
+	return m_size_of_sprite;
 }
 
 void Map::insert(int x, int y, char character) {
@@ -84,7 +84,7 @@ sf::Sprite Map::get_map(int i, int j)
 		break;
 		}
 	}
-	sprite.scale(size_of_sprite / 50, size_of_sprite / 50);
+	sprite.scale(m_size_of_sprite / 50, m_size_of_sprite / 50);
 	sprite.setPosition(get_location(i,j ));
 	return sprite;
 }
@@ -119,13 +119,13 @@ sf::Sprite Map::get_transperant()
 	}
 	sprite.setColor(sf::Color(255, 255, 255, 150));
 	sprite.setPosition(get_location(curr_mose_over_x, curr_mose_over_y));
-	sprite.scale(size_of_sprite / 50, size_of_sprite / 50);
+	sprite.scale(m_size_of_sprite / 50, m_size_of_sprite / 50);
 	return sprite;
 
 }
 sf::Vector2f Map::get_location(int i, int j)
 {
-	return sf::Vector2f( m_location.y + j* size_of_sprite, m_location.x + i * size_of_sprite);
+	return sf::Vector2f( m_location.y + j* m_size_of_sprite, m_location.x + i * m_size_of_sprite);
 }
 
 //sets the 0,0 location
@@ -135,14 +135,14 @@ void Map::set_location(Window& window)
 	float width = window.get_width();
 	width -= window.get_width() * 0.2 ; //reducing size of side pannel
 	width *= 0.5; // finds center;
-	float size_of_spr = 0.5 * size_of_sprite * m_width;
+	float size_of_spr = 0.5 * m_size_of_sprite * m_width;
 	width -= size_of_spr;
 
 	float x = window.get_width() * 0.2 + width;
 
 	float height = window.get_height();
 	height *= 0.5; //find center
-	size_of_spr = 0.5 * size_of_sprite * m_height;
+	size_of_spr = 0.5 * m_size_of_sprite * m_height;
 	height -= size_of_spr;
 
 	float y = height;

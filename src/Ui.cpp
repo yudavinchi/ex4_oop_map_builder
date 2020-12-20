@@ -16,23 +16,15 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 
 	sf::Vector2f starting_location(40, 20);
 
-	std::vector <std::string > characters;
+	std::vector <char > characters;
 
-	//reamke
-	characters.push_back("H");
-	characters.push_back("#");
-	characters.push_back("@");
-	characters.push_back("-");
-	characters.push_back("%");
-	characters.push_back("*");
-
-	
+	characters = { {'H'},{'#'},{'@'}, {'-'}, {'%'}, {'*'}};
 	
 	for (int index = 0; index < number_of_add_buttons; ++index)
 	{
 		AddButton button(starting_location, 50, 50);
 		button.set_texture(m_textures[index]);
-		button.set_action(characters[index][0]);
+		button.set_action(characters[index]);
 		//need to add check for boudries
 		m_add_buttons.push_back(button);
 		starting_location.x += 100;
@@ -58,57 +50,6 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 
 };
 
-void Ui::load_textures(std::vector<std::shared_ptr<sf::Texture>>& m_textures)
-{
-	
-	auto texture_ptr1 = std::make_shared<sf::Texture>();
-	texture_ptr1->loadFromFile("ladder.png");
-	m_textures.push_back(texture_ptr1);
-
-
-	auto texture_ptr2 = std::make_shared<sf::Texture>();
-	texture_ptr2->loadFromFile("ground.png");
-	m_textures.push_back(std::move(texture_ptr2));
-
-	auto texture_ptr3 = std::make_shared<sf::Texture>();
-	texture_ptr3->loadFromFile("player.png");
-	m_textures.push_back(std::move(texture_ptr3));
-
-	auto texture_ptr4 = std::make_shared<sf::Texture>();
-	texture_ptr4->loadFromFile("rope.png");
-	m_textures.push_back(std::move(texture_ptr4));
-
-	auto texture_ptr6 = std::make_shared<sf::Texture>();
-	texture_ptr6->loadFromFile("enemy.png");
-	m_textures.push_back(std::move(texture_ptr6));
-
-	auto texture_ptr7 = std::make_shared<sf::Texture>();
-	texture_ptr7->loadFromFile("coin.png");
-	m_textures.push_back(std::move(texture_ptr7));
-
-	auto texture_ptr5 = std::make_shared<sf::Texture>();
-	texture_ptr5->loadFromFile("wall.png");
-	m_textures.push_back(std::move(texture_ptr5));
-
-	auto texture_ptr8 = std::make_shared<sf::Texture>();
-	texture_ptr8->loadFromFile("Remove P.png");
-	m_textures.push_back(std::move(texture_ptr8));
-
-
-	auto texture_ptr9 = std::make_shared<sf::Texture>();
-	texture_ptr9->loadFromFile("Remove NP.png");
-	m_textures.push_back(std::move(texture_ptr9));
-
-	auto texture_ptr10 = std::make_shared<sf::Texture>();
-	texture_ptr10->loadFromFile("Reset P.png");
-	m_textures.push_back(std::move(texture_ptr10));
-
-
-	auto texture_ptr11 = std::make_shared<sf::Texture>();
-	texture_ptr11->loadFromFile("Reset NP.png");
-	m_textures.push_back(std::move(texture_ptr11));
-};
-
 void Ui::Draw(sf::RenderWindow& window)
 {
 	//draws side pannel
@@ -120,7 +61,7 @@ void Ui::Draw(sf::RenderWindow& window)
 	//draws add button
 	for (int index = 0; index < number_of_add_buttons; ++index)
 	{
-		m_add_buttons[index].Draw_add(window);
+		m_add_buttons[index].Draw(window);
 	}
 
 	//draws delete button
@@ -270,3 +211,57 @@ void Ui::handle_relese(sf::Vector2f& location)
 	}
 
 }
+
+
+
+
+
+void Ui::load_textures(std::vector<std::shared_ptr<sf::Texture>>& m_textures)
+{
+	auto texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("ladder.png");
+	m_textures.push_back(texture_ptr);
+
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("ground.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("player.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("rope.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("enemy.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("coin.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("wall.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Remove P.png");
+	m_textures.push_back(texture_ptr);
+
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Remove NP.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Reset P.png");
+	m_textures.push_back(texture_ptr);
+
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Reset NP.png");
+	m_textures.push_back(texture_ptr);
+};
