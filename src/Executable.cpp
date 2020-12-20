@@ -103,6 +103,7 @@ void Executable::run()
 			}
 		}
 	}
+	file.close();
 }
 
 void Executable::hadle_click(sf::Vector2f &location, Ui & ui)

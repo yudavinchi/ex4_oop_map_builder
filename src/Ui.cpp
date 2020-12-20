@@ -240,7 +240,7 @@ void Ui::hadle_click(sf::Vector2f &location)
 
 	if (m_save_button.button_pressed(location))
 	{
-		// m_map.save();
+		m_map.save();
 
 		if (m_pressed == pressed::DELETE)
 		{
