@@ -98,25 +98,21 @@ sf::Vector2i Intro::run()
 				{
 					if (height_box.getFillColor() == white_color)
 					{
-						std::cout << "ASCII character typed: " << (event.text.unicode) << std::endl;
 
 						if (height.size() < MAX_LENGTH)
 							height += (char)(event.text.unicode);
 
 						height_string.setString(height);
-
-						std::cout << height << std::endl;
 					}
 
 					if (width_box.getFillColor() == white_color)
 					{
-						std::cout << "ASCII character typed: " << (event.text.unicode) << std::endl;
+					
 						if (width.size() < MAX_LENGTH)
 							width += (char)(event.text.unicode);
 
 						width_string.setString(width);
 
-						std::cout << width << std::endl;
 					}
 				}
 				// erase = 8 in ASCII 
@@ -124,26 +120,23 @@ sf::Vector2i Intro::run()
 				{
 					if (height_box.getFillColor() == white_color)
 					{
-						std::cout << "ASCII character typed: " << (event.text.unicode) << std::endl;
+					
 
 						if (height.size() > 0)
 							height.pop_back();
 
 						height_string.setString(height);
 
-						std::cout << height << std::endl;
 					}
 
 					if (width_box.getFillColor() == white_color)
 					{
-						std::cout << "ASCII character typed: " << (event.text.unicode) << std::endl;
+						
 
 						if (width.size() > 0)
 							width.pop_back();
 
 						width_string.setString(width);
-
-						std::cout << width << std::endl;
 					}
 				}
 				break;
