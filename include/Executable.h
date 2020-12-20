@@ -17,6 +17,5 @@ public:
 	Executable() = default;
 	void run();
 	void hadle_click(sf::Vector2f& location, Ui& ui);
-private:
-	
+	void hadle_release(sf::Vector2f& location, Ui& ui);
 };

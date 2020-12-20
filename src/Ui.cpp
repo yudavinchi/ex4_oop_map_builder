@@ -54,7 +54,7 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 
 	m_reset_button = SpriteButton(location_reset, 50, 100);
 
-	m_reset_button.set_texture(m_textures[RESET_NT_PRS_TEXTURE], m_textures[RESET_NT_PRS_TEXTURE]);
+	m_reset_button.set_texture(m_textures[RESET_PRS_TEXTURE], m_textures[RESET_NT_PRS_TEXTURE]);
 
 };
 
@@ -186,16 +186,14 @@ void Ui::hadle_click(sf::Vector2f & location)
 	{
 		if (m_pressed != pressed::DELETE)
 		{
-			if(m_pressed == pressed::SAVE){
-			}
-			else if (m_pressed == pressed::RESET)
-			{
-				m_reset_button.set_pressed();
-			}
-			else {
-				if(m_curr_pressed_add != NULL)
-				m_curr_pressed_add->set_pressed();
-			}
+			if(m_curr_pressed_add != NULL)
+			m_curr_pressed_add->set_pressed();
+		}
+		else
+		{
+			m_pressed = pressed::NONE;
+			m_remove_button.set_pressed();
+			return;
 		}
 			//resets other button
 		m_pressed = pressed::DELETE;
@@ -208,22 +206,17 @@ void Ui::hadle_click(sf::Vector2f & location)
 	if (m_reset_button.button_pressed(location))
 	{
 		m_map.reset();
-
-		if (m_pressed != pressed::RESET)
+		
+		if (m_pressed == pressed::DELETE)
 		{
-			if (m_pressed == pressed::SAVE)
-			{
-
-			}
-			else if (m_pressed == pressed::DELETE)
-			{
-				m_remove_button.set_pressed();
-			}
-			else {
-				if (m_curr_pressed_add != NULL)
-					m_curr_pressed_add->set_pressed();
-			}
+			m_remove_button.set_pressed();
 		}
+		else 
+		{
+			if (m_pressed != pressed::NONE)
+				m_curr_pressed_add->set_pressed();
+		}
+		
 		//resets other button
 		m_pressed = pressed::RESET;
 		m_reset_button.set_pressed();
@@ -232,7 +225,7 @@ void Ui::hadle_click(sf::Vector2f & location)
 	}
 	//if save
 
-	//if reset
+	
 }
 
 
@@ -240,6 +233,7 @@ void Ui::handle_mouse_over(sf::Vector2f& location)
 {
 	m_map.handle_mouse_over(location, m_pressed);
 }
+
 
 
 //sets curr pressed item
@@ -260,6 +254,19 @@ void Ui::set_pressed(enum pressed what_pressed, AddButton & button)
 		m_curr_pressed_add == NULL;
 		m_pressed = pressed::NONE;
 	}
-	
-	
+}
+
+void Ui::handle_relese(sf::Vector2f& location)
+{
+
+	if (m_reset_button.button_pressed(location))
+	{
+		if (m_pressed == pressed::RESET)
+		{
+			m_reset_button.set_pressed();
+			m_pressed = pressed::NONE;
+			return;
+		}
+	}
+
 }

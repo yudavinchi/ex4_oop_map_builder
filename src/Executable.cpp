@@ -65,7 +65,7 @@ void Executable::run()
 					main_window.close();
 					break;
 
-				case sf::Event::MouseButtonReleased:
+				case sf::Event::MouseButtonPressed:
 				{
 					auto location = main_window.mapPixelToCoords(
 						{ event.mouseButton.x, event.mouseButton.y });
@@ -79,7 +79,24 @@ void Executable::run()
 						}
 					break;
 					}
+					break;
 				}
+				case sf::Event::MouseButtonReleased:
+				{
+					auto location = main_window.mapPixelToCoords(
+						{ event.mouseButton.x, event.mouseButton.y });
+
+					switch (event.mouseButton.button)
+					{
+					case sf::Mouse::Button::Left:
+					{
+						hadle_release(location, ui);
+						break;
+					}
+					break;
+					}
+				}
+				break;
 			}
 		}
 	}
@@ -90,4 +107,7 @@ void Executable::hadle_click(sf::Vector2f &location, Ui & ui)
 	ui.hadle_click(location);
 }
 
-
+void Executable::hadle_release(sf::Vector2f& location, Ui& ui)
+{
+	ui.handle_relese(location);
+}
