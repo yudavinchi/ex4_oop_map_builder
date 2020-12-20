@@ -162,7 +162,7 @@ sf::Text Intro::init_text(std::string &string, sf::Vector2f &location) const
 	auto text = sf::Text(string, m_font);
 	text.setCharacterSize(40);
 	text.setPosition(location);
-	text.setColor(sf::Color::Green);
+	text.setColor(sf::Color::Black);
 
 	return text;
 }

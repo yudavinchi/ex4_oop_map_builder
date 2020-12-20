@@ -10,6 +10,7 @@ void Executable::run()
 	Window window(1200, 900, "Map Builder");
 
 	Intro intro;
+
 	sf::Vector2i size = intro.run();
 
 	float scale = 0;
