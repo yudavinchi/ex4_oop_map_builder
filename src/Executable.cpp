@@ -16,7 +16,7 @@ void Executable::run()
 	float scale = 0;
 
 	if (size.x == size.y && size.x == -1)
-		scale = 13;
+		scale = 10;
 	else if (size.x > size.y)
 		scale = size.x;
 	else

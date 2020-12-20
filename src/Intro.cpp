@@ -1,5 +1,6 @@
 #include "Intro.h"
 
+// c-tor
 Intro::Intro()
 	 :Window(MAX_WIDTH, MAX_HEIGHT, "Initializer")
 {
@@ -10,6 +11,7 @@ Intro::Intro()
 	m_location_send_button   = sf::Vector2f(160, 100);
 }
 
+// runs the intro
 sf::Vector2i Intro::run()
 {
 	sf::Vector2i values;
