@@ -67,61 +67,61 @@ Ui::Ui(Window& window, sf::Font& font, Map& map) :
 void Ui::load_textures(std::vector<std::shared_ptr<sf::Texture>>& m_textures)
 {
 	
-	auto texture_ptr1 = std::make_shared<sf::Texture>();
-	texture_ptr1->loadFromFile("ladder.png");
-	m_textures.push_back(texture_ptr1);
+	auto texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("ladder.png");
+	m_textures.push_back(texture_ptr);
 
 
-	auto texture_ptr2 = std::make_shared<sf::Texture>();
-	texture_ptr2->loadFromFile("ground.png");
-	m_textures.push_back(std::move(texture_ptr2));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("ground.png");
+	m_textures.push_back(texture_ptr);
 
-	auto texture_ptr3 = std::make_shared<sf::Texture>();
-	texture_ptr3->loadFromFile("player.png");
-	m_textures.push_back(std::move(texture_ptr3));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("player.png");
+	m_textures.push_back(texture_ptr);
 
-	auto texture_ptr4 = std::make_shared<sf::Texture>();
-	texture_ptr4->loadFromFile("rope.png");
-	m_textures.push_back(std::move(texture_ptr4));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("rope.png");
+	m_textures.push_back(texture_ptr);
 
-	auto texture_ptr6 = std::make_shared<sf::Texture>();
-	texture_ptr6->loadFromFile("enemy.png");
-	m_textures.push_back(std::move(texture_ptr6));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("enemy.png");
+	m_textures.push_back(texture_ptr);
 
-	auto texture_ptr7 = std::make_shared<sf::Texture>();
-	texture_ptr7->loadFromFile("coin.png");
-	m_textures.push_back(std::move(texture_ptr7));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("coin.png");
+	m_textures.push_back(texture_ptr);
 
-	auto texture_ptr5 = std::make_shared<sf::Texture>();
-	texture_ptr5->loadFromFile("wall.png");
-	m_textures.push_back(std::move(texture_ptr5));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("wall.png");
+	m_textures.push_back(texture_ptr);
 
-	auto texture_ptr8 = std::make_shared<sf::Texture>();
-	texture_ptr8->loadFromFile("Remove P.png");
-	m_textures.push_back(std::move(texture_ptr8));
-
-
-	auto texture_ptr9 = std::make_shared<sf::Texture>();
-	texture_ptr9->loadFromFile("Remove NP.png");
-	m_textures.push_back(std::move(texture_ptr9));
-
-	auto texture_ptr10 = std::make_shared<sf::Texture>();
-	texture_ptr10->loadFromFile("Reset P.png");
-	m_textures.push_back(std::move(texture_ptr10));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Remove P.png");
+	m_textures.push_back(texture_ptr);
 
 
-	auto texture_ptr11 = std::make_shared<sf::Texture>();
-	texture_ptr11->loadFromFile("Reset NP.png");
-	m_textures.push_back(std::move(texture_ptr11));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Remove NP.png");
+	m_textures.push_back(texture_ptr);
 
-	auto texture_ptr12 = std::make_shared<sf::Texture>();
-	texture_ptr12->loadFromFile("Save P.png");
-	m_textures.push_back(std::move(texture_ptr12));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Reset P.png");
+	m_textures.push_back(texture_ptr);
 
 
-	auto texture_ptr13 = std::make_shared<sf::Texture>();
-	texture_ptr13->loadFromFile("Save NP.png");
-	m_textures.push_back(std::move(texture_ptr13));
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Reset NP.png");
+	m_textures.push_back(texture_ptr);
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Save P.png");
+	m_textures.push_back(texture_ptr);
+
+
+	texture_ptr = std::make_shared<sf::Texture>();
+	texture_ptr->loadFromFile("Save NP.png");
+	m_textures.push_back(texture_ptr);
 };
 
 void Ui::Draw(sf::RenderWindow& window)
