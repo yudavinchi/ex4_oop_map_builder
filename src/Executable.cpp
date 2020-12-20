@@ -3,37 +3,35 @@
 
 void Executable::run()
 {
+	//for main loop use
+	sf::Mouse mouse;
 	sf::Event event;
-	sf::Font font;
 
 	//creates main window
 	Window window(1200, 900, "Map Builder");
 
+	//runs the intro window
 	Intro intro;
 
 	sf::Vector2i size = intro.run();
 
-	float scale = 0;
 
-	if (size.x == size.y && size.x == -1)
-		scale = 10;
-	else if (size.x > size.y)
+	//setting scale factor for map
+	float scale = 1;
+	
+	if (size.x > size.y)
 		scale = size.x;
 	else
 		scale = size.y;
 
+	//building map
 	Map map(size.x, size.y, (80 * 10 / scale));
+
 	//sets location of the map based on window
 	map.set_location(window);
 
-	std::fstream file;
-
-	file.open("Board.txt", std::ios::out | std::ios::app);
-	file.close();
-	file.open("Board.txt", std::ios::in | std::ios::out | std::ios::app);
-
 	//sets ui
-	Ui ui(window, font, map);
+	Ui ui(window, map);
 	
 	//renders main window
 	sf::RenderWindow main_window(sf::VideoMode(window.get_width(), window.get_height()), window.get_name());
@@ -44,9 +42,7 @@ void Executable::run()
 	{
 		main_window.clear(sf::Color::Black);
 	
-
 		//--------------------------------------------------------------------------------
-		sf::Mouse mouse;
 			
 		auto location = main_window.mapPixelToCoords(
 			{ mouse.getPosition(main_window).x, mouse.getPosition(main_window).y });
@@ -55,9 +51,11 @@ void Executable::run()
 		ui.handle_mouse_over(location);
 
 		//--------------------------------------------------------------------------------
+
 		//draws all of the ui
 		ui.Draw(main_window);
 		
+
 		main_window.display();
 
 
@@ -85,6 +83,7 @@ void Executable::run()
 					}
 					break;
 				}
+				//for on press action buttons
 				case sf::Event::MouseButtonReleased:
 				{
 					auto location = main_window.mapPixelToCoords(
@@ -104,15 +103,17 @@ void Executable::run()
 			}
 		}
 	}
-	file.close();
 }
+//---------------------------------------------------------------------
 
 void Executable::hadle_click(sf::Vector2f &location, Ui & ui)
 {
 	ui.hadle_click(location);
 }
+//---------------------------------------------------------------------
 
 void Executable::hadle_release(sf::Vector2f& location, Ui& ui)
 {
 	ui.handle_relese(location);
 }
+//---------------------------------------------------------------------

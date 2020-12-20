@@ -5,8 +5,6 @@
 
 int main()
 {
-
 	Executable::run();
-	
 	return 0;
 }

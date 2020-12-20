@@ -1,6 +1,5 @@
 /*
-Class for holding the map, drawing it, hadleing the mouse over and mouse click.
-
+Class for holding the map, drawing it, hadndeling the mouse over and mouse click.
 */
 #pragma once
 #include <vector>
@@ -15,7 +14,6 @@ class Map
 public:
 	//C-tors
 	Map(float m_width, float m_height, float size_of_char);
-	Map(std::string path, float size_of_sprite);
 
 	//Setters:
 	void set_location(Window& window);
@@ -38,7 +36,6 @@ public:
 	void remove_char_from_map(int i, int j);
 	void reset();
 	void save();
-
 private:
 
 	//private getters:
@@ -56,7 +53,6 @@ private:
 	//for player control:
 	bool m_there_is_player = false;
 	sf::Vector2i m_player_location = sf::Vector2i(-1,-1);
-	
 	
 	//for mouse over:
 	float curr_mose_over_x =-1;

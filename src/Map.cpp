@@ -57,45 +57,13 @@ Map::Map(float height, float width, float size_of_sprite):
 			m_size_of_sprite = (80 * 10 / m_height);
 
 		m_map = map;
+		
+		file.close();
 	}
 }
 //---------------------------------------------------------------
 
-Map::Map(std::string path, float size_of_sprite)
-	:m_width(0), m_height(0), m_size_of_sprite(size_of_sprite)
-{
-	std::vector <std::vector<char>> map;
-
-	std::fstream file;
-
-	file.open(path);
-
-	std::vector<char> chars;
-	std::string line;
-
-	do
-	{
-		//reads each line from the Board.txt
-		getline(file, line);
-
-		for (int j = 0; j < line.size(); j++)
-		{
-			chars.push_back(line[j]);
-		}
-
-		map.push_back(chars);
-
-		chars.clear();
-	}
-	// Read the next line from File untill it reaches empty row.
-	while (!file.eof());
-
-	m_width = map[0].size();
-	m_height = map.size();
-
-	m_map = map;
-}
-
+//---------------------------------------------------------------
 
 //------------------------------Setters--------------------------
 void Map::set_textures(std::vector<std::shared_ptr<sf::Texture>>& textures)
@@ -242,6 +210,7 @@ bool Map::handle_click(sf::Vector2f& location, pressed& pressed)
 					return true;
 
 				case pressed::PLAYER:
+					//the if handles the fact there wont be 2 players
 					if (!m_there_is_player) {
 						add_char_to_map(i, j, PLAYER);
 						m_there_is_player = true;
@@ -310,39 +279,40 @@ void Map::handle_mouse_over(sf::Vector2f& location, pressed& pressed)
 					switch (pressed)
 					{
 					case pressed::NONE:
-						set_transperant(NONE);
 
-						return;;
+						set_transperant(NONE);
+						return;
 
 					case pressed::PLAYER:
-						set_transperant(PLAYER);
 
+						set_transperant(PLAYER);
 						return;
+
 					case pressed::LADDER:
 						
 						set_transperant(LADDER);
-
 						return;
 
 					case pressed::COIN:
-						set_transperant(COIN);
 
+						set_transperant(COIN);
 						return;
 
-
 					case pressed::POLE:
-						set_transperant(POLE);
 
+						set_transperant(POLE);
 						return;
 
 					case pressed::WALL:
-						set_transperant(WALL);
 
+						set_transperant(WALL);
 						return;
 
 					case pressed::ENEMY:
+
 						set_transperant(ENEMY);
 						return;
+
 					default:
 						return;
 					}
@@ -420,5 +390,7 @@ void Map::save()
 		if (i != m_height - 1)
 			file << '\n';
 	}
+	file.close();
 }
 //---------------------------------------------------------------
+
