@@ -44,7 +44,7 @@ Map::Map(float height, float width, float size_of_sprite):
 			chars.clear();
 		}
 		// Read the next line from File untill it reaches empty row.
-		while (!file.eof());
+		while (!file.eof()); //|| line.size() > 0
 
 		m_width = map[0].size();
 		m_height = map.size();
@@ -392,6 +392,23 @@ void Map::reset()
 		{
 			m_map[i][j] = NONE;
 		}
+	}
+}
+//---------------------------------------------------------------
+
+void Map::save()
+{
+	std::ofstream file;
+
+	file.open("Board.txt", std::ofstream::in | std::ofstream::out | std::ofstream::trunc);
+
+	for (int i = 0; i < m_height; ++i)
+	{
+		for (int j = 0; j < m_width; j++)
+		{
+			file << m_map[i][j];
+		}
+		file << '\n';
 	}
 }
 //---------------------------------------------------------------

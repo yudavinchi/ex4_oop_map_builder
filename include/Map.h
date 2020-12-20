@@ -6,6 +6,7 @@ Class for holding the map, drawing it, hadleing the mouse over and mouse click.
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include <fstream>
+#include <iostream>
 #include "Window.h"
 #include "Macros.h"
 
@@ -36,6 +37,7 @@ public:
 	void add_char_to_map(int i, int j, const char game_char);
 	void remove_char_from_map(int i, int j);
 	void reset();
+	void save();
 
 private:
 
