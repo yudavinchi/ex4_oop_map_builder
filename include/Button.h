@@ -10,7 +10,6 @@ public:
 	Button() = default;
 	Button(sf::Vector2f& vector, int height, int width);
 
-
 protected:
 
 	sf::Vector2f m_position;

@@ -3,8 +3,6 @@
 
 void Executable::run()
 {
-
-	
 	Intro intro;
 
 	sf::Vector2i size = intro.run();

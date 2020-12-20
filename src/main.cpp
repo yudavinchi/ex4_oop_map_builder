@@ -6,10 +6,7 @@
 int main()
 {
 
-	Executable exe;
-	exe.run();
+	Executable::run();
 	
-
-	std::cin.get();
 	return 0;
 }
