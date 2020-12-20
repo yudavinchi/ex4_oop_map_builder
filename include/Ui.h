@@ -17,6 +17,7 @@ public:
 	Ui(Window& window,sf::Font& font, Map & map);
 	void Draw(sf::RenderWindow& window);
 	void hadle_click(sf::Vector2f & location);
+	void handle_relese(sf::Vector2f& location);
 	void set_pressed(enum pressed what_pressed, AddButton& button);
 	void handle_mouse_over(sf::Vector2f& location);
 	
