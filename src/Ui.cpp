@@ -82,10 +82,6 @@ void Ui::hadle_click(sf::Vector2f & location)
 		{
 			if (m_pressed == pressed::DELETE)
 				m_remove_button.set_pressed();
-			else if (m_pressed == pressed::SAVE)
-				std::cout << "svae";
-			else if(m_pressed == pressed::RESET)
-				m_reset_button.set_pressed();
 
 			switch (m_add_buttons[i].get_char())
 			{

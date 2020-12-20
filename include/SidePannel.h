@@ -6,9 +6,7 @@ class SidePannel
 {
 public:
 	SidePannel(float height_of_window, float widht_of_window);
-
 	void Draw(sf::RenderWindow& window);
-
 	int getWidth();
 
 private:

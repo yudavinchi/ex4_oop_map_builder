@@ -43,7 +43,7 @@ void AddButton::set_pressed()
 
 void AddButton::set_texture(std::shared_ptr<sf::Texture >& texture)
 {
-	m_texture = &(*texture);
+	m_texture = texture;
 }
 //---------------------------------------------------------------
 

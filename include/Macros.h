@@ -1,5 +1,6 @@
 #pragma once
 
+//for texture indexing
 #define LADDER_TEXTURE 0
 #define GROUND_TEXTURE 1
 #define PLAYER_TEXTURE 2

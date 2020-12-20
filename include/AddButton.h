@@ -37,7 +37,7 @@ private:
 	sf::Color m_color = sf::Color(255, 255, 255, 0);
 
 	//members with set value:
-	sf::Texture* m_texture;
+	std::shared_ptr<sf::Texture > m_texture;
 	char m_action;
 
 	//helper functions:
